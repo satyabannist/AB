@@ -152,22 +152,11 @@
     "difficulty": "medium",
     "type": "mcq",
     "format": "text",
-    "content": "Let  A = \\{0, 1, 2, 3, 4, 5\\}. Let \\( R \\) be a relation on \\( A \\) defined by \\( (x, y) \\in R \\) if and only if \\( \\max(x, y) \\in \\{3, 4\\} \\).<br>Then among the statements:<br>(S1): The number of elements in \\( R \\) is 18<br>(S2): The relation \\( R \\) is symmetric but neither reflexive nor transitive<br>Which of the following is correct?<br>(a) Only S1 is correct<br>(b) Only S2 is correct<br>(c) Both S1 and S2 are correct<br>(d) Neither S1 nor S2 is correct",
+    "content": "Let  A = \\({0, 1, 2, 3, 4, 5}\\). Let \\( R \\) be a relation on \\( A \\) defined by \\( (x, y) \\in R \\) if and only if \\( \\max(x, y) \\in \\{3, 4\\} \\).<br>Then among the statements:<br>(S1): The number of elements in \\( R \\) is 18<br>(S2): The relation \\( R \\) is symmetric but neither reflexive nor transitive<br>Which of the following is correct?<br>(a) Only S1 is correct<br>(b) Only S2 is correct<br>(c) Both S1 and S2 are correct<br>(d) Neither S1 nor S2 is correct",
     "solution": "Correct option: (c) Both S1 and S2 are correct",
     "marks": 1
   },
-	{
-    "id": 1,
-    "class": "JEE",
-    "subject": "Math",
-    "topic": "Relations and Functions",
-    "difficulty": "medium",
-    "type": "mcq",
-    "format": "text",
-    "content": "Let $A = \\{0, 1, 2, 3, 4, 5\\}$. Let $R$ be a relation on $A$ defined by $(x, y) \\in R$ if and only if $\\max\\{x, y\\} \\in \\{3, 4\\}$. Then among the statements: \n(S1): The number of elements in $R$ is 18. \n(S2): The relation $R$ is symmetric but neither reflexive nor transitive.\nA. both are false\nB. only (S1) is true\nC. only (S2) is true\nD. both are true",
-    "solution": "Correct answer: D. both are true",
-    "marks": 1
-  },
+	
   {
     "id": 2,
     "class": "JEE",
@@ -176,7 +165,7 @@
     "difficulty": "hard",
     "type": "mcq",
     "format": "text",
-    "content": "Let $A = \\{ (\\alpha, \\beta) \\in \\mathbb{R} \\times \\mathbb{R} : |\\alpha - 1| \\leq 4 \\text{ and } |\\beta - 5| \\leq 6 \\}$ and \n$B = \\{ (\\alpha, \\beta) \\in \\mathbb{R} \\times \\mathbb{R} : 16(\\alpha - 2)^2 + 9(\\beta - 6)^2 \\leq 144 \\}$. Then:\nA. $A \\subset B$\nB. $B \\subset A$\nC. neither $A \\subset B$ nor $B \\subset A$\nD. $A \\cup B = \\{(x, y) : -4 \\leq x \\leq 4,\\ -1 \\leq y \\leq 11 \\}$",
+    "content": "Let \\( A = \\{ (\\alpha, \\beta) \\in \\mathbb{R} \\times \\mathbb{R} : |\\alpha - 1| \\leq 4 \\text{ and } |\\beta - 5| \\leq 6 \\}\\) and \n \\(B = \\{ (\\alpha, \\beta) \\in \\mathbb{R} \\times \\mathbb{R} : 16(\\alpha - 2)^2 + 9(\\beta - 6)^2 \\leq 144 \\}\\). Then:\nA. \\(A \\subset B\\)\nB. \\(B \\subset A\\)\nC. neither \\(A \\subset B\\) nor \\(B \\subset A\\)\nD. \\(A \\cup B = \\{(x, y) : -4 \\leq x \\leq 4,\\ -1 \\leq y \\leq 11 \\}\\)",
     "solution": "Correct answer: B. $B \\subset A$",
     "marks": 1
   },

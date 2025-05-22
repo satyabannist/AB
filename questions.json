@@ -22,5 +22,18 @@
     "content": "State Newton's Second Law.",
     "solution": "Force equals mass times acceleration: \\( F = ma \\).",
     "marks": 2
+  },
+  {
+    "id": 3,
+    "class": "11",
+    "subject": "Math",
+    "topic": "Set",
+    "difficulty": "medium",
+    "type": "long",
+    "format": "image",
+    "content": "images/q1.jpg",
+    "solution": "images/q3.jpg",
+	"solutionFormat": "image", 
+    "marks": 5
   }
 ]

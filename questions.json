@@ -35,5 +35,17 @@
     "solution": "images/q3.jpg",
 	"solutionFormat": "image", 
     "marks": 5
+  },
+{
+    "id": 4,
+    "class": "12",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "difficulty": "medium",
+    "type": "short",
+    "format": "text",
+    "content": "Explain Mendel's law of segregation.",
+    "solution": "Mendel's law states that allele pairs separate during gamete formation.",
+    "marks": 3
   }
 ]

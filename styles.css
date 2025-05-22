@@ -234,3 +234,32 @@ body {
 }
 
 /* Keep your existing .remove-btn, .btn-secondary etc styles */
+.remove-btn {
+  background: transparent;
+  border: none;
+  color: #e74c3c;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: #95a5a6;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #7f8c8d;
+}
+.question img, .solution img {
+  max-width: 100%;
+  max-height: 150px;
+  display: block;
+  margin-top: 10px;
+}
+

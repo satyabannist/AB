@@ -33,7 +33,166 @@
     "format": "image",
     "content": "images/q1.jpg",
     "solution": "images/q3.jpg",
-	"solutionFormat": "image", 
+    "solutionFormat": "image", 
     "marks": 5
+  },[
+  {
+    "id": 1,
+    "class": "11",
+    "subject": "Math",
+    "topic": "Set",
+    "difficulty": "medium",
+    "type": "long",
+    "format": "image",
+    "content": "images/q1.jpg",
+    "solution": "images/q3.jpg",
+    "solutionFormat": "image",
+    "marks": 5
+  },
+  {
+    "id": 2,
+    "class": "11",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "difficulty": "easy",
+    "type": "short",
+    "format": "text",
+    "content": "State Newton's Second Law.",
+    "solution": "Force equals mass times acceleration: \\( F = ma \\).",
+    "marks": 2
+  },
+  {
+    "id": 3,
+    "class": "12",
+    "subject": "Chemistry",
+    "topic": "Organic",
+    "difficulty": "hard",
+    "type": "mcq",
+    "format": "text",
+    "content": "Which is the functional group of alcohols?",
+    "solution": "The functional group of alcohols is \\(-OH\\).",
+    "marks": 1
+  },
+  {
+    "id": 4,
+    "class": "12",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "difficulty": "medium",
+    "type": "short",
+    "format": "text",
+    "content": "Explain Mendel's law of segregation.",
+    "solution": "Mendel's law states that allele pairs separate during gamete formation.",
+    "marks": 3
+  },
+  {
+    "id": 5,
+    "class": "11",
+    "subject": "Math",
+    "topic": "Set",
+    "difficulty": "medium",
+    "type": "long",
+    "format": "text",
+    "content": "Evaluate:  \\( \\int x^{2} \\, dx \\)",
+    "solution": "Solution is \\( \\frac{x^3}{3} + C \\).",
+    "marks": 5
+  },
+  {
+    "id": 6,
+    "class": "11",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "difficulty": "easy",
+    "type": "short",
+    "format": "text",
+    "content": "State Newton's Second Law.",
+    "solution": "Force equals mass times acceleration: \\( F = ma \\).",
+    "marks": 2
+  },
+  {
+    "id": 7,
+    "class": "12",
+    "subject": "Chemistry",
+    "topic": "Organic",
+    "difficulty": "hard",
+    "type": "mcq",
+    "format": "text",
+    "content": "Which is the functional group of alcohols?",
+    "solution": "The functional group of alcohols is \\(-OH\\).",
+    "marks": 1
+  },
+  {
+    "id": 8,
+    "class": "12",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "difficulty": "medium",
+    "type": "short",
+    "format": "text",
+    "content": "Explain Mendel's law of segregation.",
+    "solution": "Mendel's law states that allele pairs separate during gamete formation.",
+    "marks": 3
+  },
+  {
+    "id": 9,
+    "class": "11",
+    "subject": "Math",
+    "topic": "Trigonometry",
+    "difficulty": "easy",
+    "type": "short",
+    "format": "text",
+    "content": "\\(\\sin(\\theta) = ?\\)",
+    "solution": "The sine of an angle is the ratio of the opposite side to the hypotenuse.",
+    "marks": 2
+  },
+  {
+    "id": 10,
+    "class": "12",
+    "subject": "Physics",
+    "topic": "Optics",
+    "difficulty": "medium",
+    "type": "long",
+    "format": "text",
+    "content": "Derive lens formula.",
+    "solution": "The lens formula is \\( \\frac{1}{f} = \\frac{1}{v} - \\frac{1}{u} \\). Derivation involves geometry and sign conventions.",
+    "marks": 5
+  },
+  {
+    "id": 11,
+    "class": "12",
+    "subject": "Biology",
+    "topic": "Digestive",
+    "difficulty": "medium",
+    "type": "long",
+    "format": "text",
+    "content": "What is food?",
+    "solution": "Food is any substance consumed to provide nutritional support for the body.",
+    "marks": 4
+  },
+  {
+    "id": 101,
+    "class": "12",
+    "subject": "Math",
+    "topic": "Integrals",
+    "difficulty": "medium",
+    "type": "mcq",
+    "format": "text",
+    "content": "Evaluate:  \\( \\int \\sin x \\, dx \\)<br>A. \\( -\\cos x + C \\)<br>B. \\( \\cos x + C \\)<br>C. \\( \\sin x + C \\)<br>D. \\( -\\sin x + C \\)",
+    "solution": "Correct answer: A. \\( -\\cos x + C \\)",
+    "marks": 1
+  },
+  {
+    "id": 102,
+    "class": "12",
+    "subject": "Math",
+    "topic": "Relations and Functions",
+    "difficulty": "medium",
+    "type": "mcq",
+    "format": "text",
+    "content": "Let  A = \\{0, 1, 2, 3, 4, 5\\}. Let \\( R \\) be a relation on \\( A \\) defined by \\( (x, y) \\in R \\) if and only if \\( \\max(x, y) \\in \\{3, 4\\} \\).<br>Then among the statements:<br>(S1): The number of elements in \\( R \\) is 18<br>(S2): The relation \\( R \\) is symmetric but neither reflexive nor transitive<br>Which of the following is correct?<br>(a) Only S1 is correct<br>(b) Only S2 is correct<br>(c) Both S1 and S2 are correct<br>(d) Neither S1 nor S2 is correct",
+    "solution": "Correct option: (c) Both S1 and S2 are correct",
+    "marks": 1
   }
+]
+
 ]

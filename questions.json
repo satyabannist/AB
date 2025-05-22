@@ -1,5 +1,5 @@
 [
-	 {
+  {
     "id": 1,
     "class": "11",
     "subject": "Math",
@@ -132,30 +132,6 @@
     "solution": "Food is any substance consumed to provide nutritional support for the body.",
     "marks": 4
   },
-	{
-    "id": 12,
-    "class": "12",
-    "subject": "Physics",
-    "topic": "Electric Charges and Fields",
-    "difficulty": "medium",
-    "type": "short",
-    "format": "text",
-    "content": "Five charges, each of value q, are placed at the corners of a regular pentagon of side a. What is the electric field at the center (O) of the pentagon: (a) when all five charges are present, (b) when one charge is removed, and (c) if it is replaced by a regular n-gon?",
-    "solution": "(a) Due to symmetry, net electric field at O is zero.(b) Removing one charge leaves an unbalanced field: \\( E = \\frac{q}{4 \\pi \\varepsilon_0 r^2} \\) along the direction of missing charge.(c) For any regular n-gon with identical charges, the electric field at center remains zero due to symmetry.",
-    "marks": 3
-  },
-  {
-    "id": 13,
-    "class": "12",
-    "subject": "Physics",
-    "topic": "Electric Charges and Fields",
-    "difficulty": "hard",
-    "type": "long",
-    "format": "text",
-    "content": "Assume our Universe is spherical with a radius R composed of H atoms. The charge on the proton is (1 + y)e. (a) Find the critical value of y such that expansion may start.(b) Show that the velocity of expansion is proportional to the distance from the centre.",
-    "solution": "See detailed derivation using Gauss’s law and gravitational force balance. FC = FG gives the critical y. For velocity, use proportionality from electrostatic repulsion and Newton's second law.",
-    "marks": 5
-  },
   {
     "id": 101,
     "class": "12",
@@ -164,7 +140,7 @@
     "difficulty": "medium",
     "type": "mcq",
     "format": "text",
-    "content": "Evaluate:  \\( \\int \\sin x \\, dx \\)A. \\( -\\cos x + C \\)B. \\( \\cos x + C \\)C. \\( \\sin x + C \\)D. \\( -\\sin x + C \\)",
+    "content": "Evaluate:  \\( \\int \\sin x \\, dx \\)<br>A. \\( -\\cos x + C \\)<br>B. \\( \\cos x + C \\)<br>C. \\( \\sin x + C \\)<br>D. \\( -\\sin x + C \\)",
     "solution": "Correct answer: A. \\( -\\cos x + C \\)",
     "marks": 1
   },
@@ -176,7 +152,7 @@
     "difficulty": "medium",
     "type": "mcq",
     "format": "text",
-    "content": "Let  A = \\{0, 1, 2, 3, 4, 5\\}. Let \\( R \\) be a relation on \\( A \\) defined by \\( (x, y) \\in R \\) if and only if \\( \\max(x, y) \\in \\{3, 4\\} \\).Then among the statements:(S1): The number of elements in \\( R \\) is 18(S2): The relation \\( R \\) is symmetric but neither reflexive nor transitiveWhich of the following is correct?(a) Only S1 is correct(b) Only S2 is correct(c) Both S1 and S2 are correct(d) Neither S1 nor S2 is correct",
+    "content": "Let  A = \\{0, 1, 2, 3, 4, 5\\}. Let \\( R \\) be a relation on \\( A \\) defined by \\( (x, y) \\in R \\) if and only if \\( \\max(x, y) \\in \\{3, 4\\} \\).<br>Then among the statements:<br>(S1): The number of elements in \\( R \\) is 18<br>(S2): The relation \\( R \\) is symmetric but neither reflexive nor transitive<br>Which of the following is correct?<br>(a) Only S1 is correct<br>(b) Only S2 is correct<br>(c) Both S1 and S2 are correct<br>(d) Neither S1 nor S2 is correct",
     "solution": "Correct option: (c) Both S1 and S2 are correct",
     "marks": 1
   }

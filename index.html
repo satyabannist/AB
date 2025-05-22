@@ -1,16 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Question Paper Generator</title>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script defer src="script.js"></script>
+
 </head>
+
 <body>
-  <h1>Question Paper Generator</h1>
-  <div id="questionList">Loading questions...</div>
-  <script src="script.js"></script>
+
+  <header class="header">
+    <div class="container header-container">
+      <h1 class="logo">QPaperGen</h1>
+      <nav class="nav">
+        <a href="#generator" class="nav-link">Generate Paper</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <h2>Generate Custom Question Papers Easily</h2>
+      <p>Select your class, subject, topics, difficulty, and question types to create tailored question papers with mathematical notation support.</p>
+      <a href="#generator" class="btn-primary">Start Generating</a>
+    </div>
+  </section>
+
+  <main id="generator" class="container main-content">
+    <h2>Question Paper Generator</h2>
+
+    <div class="filters">
+      <select id="classFilter" aria-label="Filter by Class">
+        <option value="all">All Classes</option>
+        <option value="10">Class 10</option>
+        <option value="11">Class 11</option>
+        <option value="12">Class 12</option>
+      </select>
+
+      <select id="subjectFilter" aria-label="Filter by Subject">
+        <option value="all">All Subjects</option>
+        <option value="Math">Math</option>
+        <option value="Physics">Physics</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="Biology">Biology</option>
+      </select>
+
+      <select id="topicFilter" aria-label="Filter by Topic">
+        <option value="all">All Topics</option>
+      </select>
+
+      <select id="difficultyFilter" aria-label="Filter by Difficulty">
+        <option value="all">All Difficulties</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+
+      <select id="typeFilter" aria-label="Filter by Type">
+        <option value="all">All Types</option>
+        <option value="mcq">MCQ</option>
+        <option value="short">Short</option>
+        <option value="long">Long</option>
+      </select>
+    </div>
+    <input type="text" id="questionSearch" placeholder="Search questions..." style="margin-bottom: 10px; width: 100%; padding: 8px;" />
+
+    <!-- Filtered Questions List -->
+    <div id="questionList" class="question-list" aria-live="polite" aria-label="Filtered Questions"></div>
+	
+	
+
+	
+
+
+    <!-- Add Selected Questions Button -->
+    <button id="addToPaperBtn" class="btn-primary" aria-label="Add Selected Questions to Paper" style="margin-bottom: 40px;">
+      Add Selected to Paper
+    </button>
+
+    <!-- Manual Question Form -->
+    <section id="manualQuestionSection" class="container main-content" aria-label="Add Manual Question" style="margin-bottom:30px;">
+      <h2>Add Your Expert Question</h2>
+      <form id="manualQuestionForm" style="display:flex; flex-direction: column; gap:12px; max-width:700px; margin:auto;">
+        <textarea id="questionContent" rows="3" placeholder="Enter question content (use LaTeX in \( ... \))" required
+          style="padding:10px; font-size:1rem; border-radius:8px; border:1px solid #ccc; resize:vertical;"></textarea>
+
+        <!-- Live Preview -->
+        <div id="questionPreview" style="border: 1px solid #ccc; border-radius:8px; padding:10px; min-height: 50px; margin-top: 8px; background: #fafafa; color: #222;"></div>
+
+        <select id="manualClass" required style="padding:10px; font-size:1rem; border-radius:8px; border:1px solid #ccc;">
+          <option value="" disabled selected>Select Class</option>
+          <option value="11">Class 11</option>
+          <option value="12">Class 12</option>
+        </select>
+
+        <input id="manualSubject" type="text" placeholder="Subject" required
+          style="padding:10px; font-size:1rem; border-radius:8px; border:1px solid #ccc;" />
+
+        <input id="manualTopic" type="text" placeholder="Topic" required
+          style="padding:10px; font-size:1rem; border-radius:8px; border:1px solid #ccc;" />
+        
+        <!-- NEW: Marks Input -->
+        <input id="manualMarks" type="number" placeholder="Marks" required
+          style="padding:10px; font-size:1rem; border-radius:8px; border:1px solid #ccc;" />
+
+        <select id="manualDifficulty" required style="padding:10px; font-size:1rem; border-radius:8px; border:1px solid #ccc;">
+          <option value="" disabled selected>Select Difficulty</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+
+        <select id="manualType" required style="padding:10px; font-size:1rem; border-radius:8px; border:1px solid #ccc;">
+          <option value="" disabled selected>Select Type</option>
+          <option value="mcq">MCQ</option>
+          <option value="short">Short</option>
+          <option value="long">Long</option>
+        </select>
+
+        <textarea id="manualSolution" rows="2" placeholder="Enter solution (optional)" 
+          style="padding:10px; font-size:1rem; border-radius:8px; border:1px solid #ccc; resize:vertical;"></textarea>
+        <!-- Live Preview -->
+        <div id="solutionPreview" style="border: 1px solid #ccc; border-radius:8px; padding:10px; min-height: 50px; margin-top: 8px; background: #fafafa; color: #222;"></div>
+
+        <button type="submit" class="btn-primary" style="align-self: flex-start; padding: 12px 30px; font-weight: 700;">Add Question to Paper</button>
+      </form>
+    </section>
+
+    <!-- Your Question Paper Section -->
+    <section id="yourPaper" class="container main-content" aria-label="Your Question Paper" style="margin-top:30px;">
+      <h2>Your Question Paper</h2>
+      <div id="paperQuestionList" class="question-list" aria-live="polite" aria-label="Selected Questions in Paper"></div>
+    </section>
+	
+	
+	<div class="paper-meta" style="margin: 20px 0; display: flex; flex-wrap: wrap; gap: 15px;">
+  <input id="examNameInput" type="text" placeholder="Exam Name"
+         style="flex:1; padding:10px; font-size:1rem; border-radius:8px; border:1px solid #ccc;" />
+  <input id="instituteNameInput" type="text" placeholder="Institute Name"
+         style="flex:1; padding:10px; font-size:1rem; border-radius:8px; border:1px solid #ccc;" />
+  <input id="subjectNameInput" type="text" placeholder="Subject Name"
+         style="flex:1; padding:10px; font-size:1rem; border-radius:8px; border:1px solid #ccc;" />
+  <input id="durationInput" type="text" placeholder="Duration (e.g. 3 hrs)"
+         style="flex:1; padding:10px; font-size:1rem; border-radius:8px; border:1px solid #ccc;" />
+</div>
+
+
+    <button id="previewBtn" class="btn-primary btn-preview" aria-label="Preview Selected Questions" style="margin-top:30px;">Preview Paper</button>
+
+    <div id="previewModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="previewTitle" aria-describedby="previewDesc">
+      <div class="modal-content">
+        <button class="close" aria-label="Close Preview">&times;</button>
+        <h2 id="previewTitle">Paper Preview</h2>
+        <div id="paperPreview" tabindex="0" aria-live="polite" aria-atomic="true"></div>
+        <button id="printBtn" class="btn-primary btn-print" aria-label="Print or Export Paper">Print / Export</button>
+      </div>
+    </div>
+  </main>
+
+  <footer id="about" class="footer">
+    <div class="container footer-container">
+      <p>&copy; 2025 QPaperGen. All rights reserved.</p>
+      <p>Made with ❤️ for educators and students.</p>
+      <p>Contact: <a href="mailto:support@qpapergen.com">support@qpapergen.com</a></p>
+    </div>
+  </footer>
+
 </body>
+
 </html>

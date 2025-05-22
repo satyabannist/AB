@@ -1,1 +1,26 @@
-[{"id": 1, "class": "11", "subject": "Math", "topic": "Set", "difficulty": "medium", "type": "long", "format": "image", "content": "images/q1.jpg", "solution": "images/q3.jpg", "solutionFormat": "image", "marks": 5}, {"id": 2, "class": "11", "subject": "Physics", "topic": "Mechanics", "difficulty": "easy", "type": "short", "content": "State Newton"s Second Law.", "solution": "Force equals mass times acceleration: \\( F = ma \\)."}, {"id": 3, "class": "12", "subject": "Math", "topic": "Integrals", "difficulty": "medium", "type": "mcq", "content": "Evaluate:  \\( \\int \\sin x \\, dx \\)<br>A. \\( -\\cos x + C \\)<br>B. \\( \\cos x + C \\)<br>C. \\( \\sin x + C \\)<br>D. \\( -\\sin x + C \\)"}]
+[
+  {
+    "id": 1,
+    "class": "11",
+    "subject": "Math",
+    "topic": "Set",
+    "difficulty": "medium",
+    "type": "long",
+    "format": "text",
+    "content": "Evaluate: \\( \\int x^{2} \\, dx \\)",
+    "solution": "Solution is \\( \\frac{x^3}{3} + C \\).",
+    "marks": 5
+  },
+  {
+    "id": 2,
+    "class": "11",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "difficulty": "easy",
+    "type": "short",
+    "format": "text",
+    "content": "State Newton's Second Law.",
+    "solution": "Force equals mass times acceleration: \\( F = ma \\).",
+    "marks": 2
+  }
+]

@@ -109,6 +109,44 @@ function displayQuestions() {
 }
 
 
+function renderPaginationControls(totalItems) {
+  let pagination = document.getElementById("paginationControls");
+  if (!pagination) {
+    pagination = document.createElement("div");
+    pagination.id = "paginationControls";
+    pagination.style.textAlign = "center";
+    pagination.style.marginTop = "20px";
+    questionList.parentElement.appendChild(pagination);
+  }
+
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  pagination.innerHTML = `
+    <button ${currentPage === 1 ? "disabled" : ""} id="prevPage">Previous</button>
+    <span> Page ${currentPage} of ${totalPages} </span>
+    <button ${currentPage === totalPages ? "disabled" : ""} id="nextPage">Next</button>
+  `;
+
+  document.getElementById("prevPage")?.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      displayQuestions();
+    }
+  });
+
+  document.getElementById("nextPage")?.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      displayQuestions();
+    }
+  });
+}
+
+
+
+
+
+
+
 function getSelectedQuestions() {
   return questions.filter(q =>
     Array.from(questionList.querySelectorAll("input[type=checkbox]:checked"))

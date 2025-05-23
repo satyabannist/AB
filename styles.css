@@ -263,3 +263,18 @@ body {
   margin-top: 10px;
 }
 
+#paginationControls button {
+  padding: 8px 16px;
+  margin: 0 10px;
+  border: none;
+  background-color: #2e86de;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#paginationControls button:disabled {
+  background-color: #ccc;
+  cursor: default;
+}

@@ -1,3 +1,5 @@
+let currentPage = 1;
+const itemsPerPage = 10;
 let questions = [];
 
 fetch('questions.json')
@@ -81,26 +83,31 @@ function filterQuestions() {
 
 function displayQuestions() {
   const filtered = filterQuestions();
+  const start = (currentPage - 1) * itemsPerPage;
+  const paginated = filtered.slice(start, start + itemsPerPage);
+
   questionList.innerHTML = "";
-  if (filtered.length === 0) {
-    questionList.textContent = "No questions found for selected filters.";
+  if (paginated.length === 0) {
+    questionList.textContent = "No questions found.";
     return;
   }
-  filtered.forEach(q => {
+
+  paginated.forEach(q => {
     const div = document.createElement("div");
     div.className = "question";
     div.innerHTML = `
       <label>
         <input type="checkbox" value="${q.id}" />
-        <span>
-  ${q.format === "image" ? `<img src="${q.content}" alt="Question Image" style="max-width: 100%; max-height: 150px;" />` : q.content}
-</span>
+        <span>${q.format === "image" ? `<img src="${q.content}" />` : q.content}</span>
       </label>
     `;
     questionList.appendChild(div);
   });
+
+  renderPaginationControls(filtered.length);
   MathJax.typesetPromise();
 }
+
 
 function getSelectedQuestions() {
   return questions.filter(q =>

@@ -370,9 +370,7 @@
     "difficulty": "medium",			
     "type": "long",			
     "format": "text",			
-    "content": "Find all the points of discontinuity of \\( f(x) = |x| - |x + 1| \\).",			
-	solution: "images/34S.jpg",		
-	solutionFormat: "image",  		
+    "content": "Find all the points of discontinuity of \\( f(x) = |x| - |x + 1| \\).",					
     "marks": 5			
   },
     {

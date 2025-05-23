@@ -165,7 +165,8 @@
     "type": "long",
     "format": "text",
     "content": "Prove that the function \\( f(x) = 5x - 3 \\) is continuous at \\( x = 0 \\), at \\( x = -3 \\) and at \\( x = 5 \\).",
-    "marks": 5
+    "solution": "The ",
+     "marks": 5
   },
   {
     "id": 2,
@@ -176,7 +177,8 @@
     "type": "long",
     "format": "text",
     "content": "Examine the continuity of the function \\( f(x) = 2x^{2} - 1 \\) at \\( x = 3 \\).",
-    "marks": 5
+    "solution": "The ",
+     "marks": 5
   },
   {
     "id": 3,
@@ -187,7 +189,8 @@
     "type": "long",
     "format": "text",
     "content": "Examine the following functions for continuity: (a) \\( f(x) = x - 5 \\), (b) \\( f(x) = \\frac{1}{x - 5}, x \\neq 5 \\), (c) \\( f(x) = \\frac{x^{2} - 25}{x + 5}, x \\neq -5 \\), (d) \\( f(x) = |x - 5| \\).",
-    "marks": 6
+    "solution": "The ",
+     "marks": 5
   },
   {
     "id": 4,
@@ -198,7 +201,8 @@
     "type": "long",
     "format": "text",
     "content": "Prove that the function \\( f(x) = x^{n} \\) is continuous at \\( x = n \\), where \\( n \\) is a positive integer.",
-    "marks": 5
+    "solution": "The ",
+     "marks": 5
   },
   {
     "id": 5,
@@ -1236,86 +1240,5 @@
     "format": "text",
     "content": "The maximum value of [x(x + 1) + 1]^(1/3), 0 ≤ x ≤ 1 is: (A) (1/3)^(1/3) (B) 1/2 (C) 1 (D) 0.",
     "marks": 3
-  },
-  
-  {
-    id: 1,
-    class: "11",
-    subject: "Math",
-    topic: "Set",
-    difficulty: "medium",
-    type: "long",
-    format: "image",
-    content: "images/q1.jpg",
-    solution: "images/q3.jpg",
-	solutionFormat: "image",  
-	 marks: 5
-  },
-  {
-    id: 2,
-    class: "11",
-    subject: "Physics",
-    topic: "Mechanics",
-    difficulty: "easy",
-    type: "short",
-    content: "State Newton's Second Law.",
-    solution: "Force equals mass times acceleration: \\( F = ma \\)."
-  },
-  {
-    id: 3,
-    class: "12",
-    subject: "Chemistry",
-    topic: "Organic",
-    difficulty: "hard",
-    type: "mcq",
-    content: "Which is the functional group of alcohols?",
-    solution: "The functional group of alcohols is \\(-OH\\)."
-  },
-  {
-    id: 4,
-    class: "12",
-    subject: "Biology",
-    topic: "Genetics",
-    difficulty: "medium",
-    type: "short",
-    content: "Explain Mendel's law of segregation.",
-    solution: "Mendel's law states that allele pairs separate during gamete formation."
-  },
-  { id: 1, class: "11", subject: "Math", topic: "Set", difficulty: "medium", type: "long", content: "Evaluate:  \\( \\int x^{2} \\, dx \\)" },
-  { id: 2, class: "11", subject: "Physics", topic: "Mechanics", difficulty: "easy", type: "short", content: "State Newton's Second Law." },
-  { id: 3, class: "12", subject: "Chemistry", topic: "Organic", difficulty: "hard", type: "mcq", content: "Which is the functional group of alcohols?" },
-  { id: 4, class: "12", subject: "Biology", topic: "Genetics", difficulty: "medium", type: "short", content: "Explain Mendel's law of segregation." },
-  { id: 5, class: "11", subject: "Math", topic: "Trigonometry", difficulty: "easy", type: "short", content: "\\(\\sin(\\theta) = ?\\)" },
-  { id: 6, class: "12", subject: "Physics", topic: "Optics", difficulty: "medium", type: "long", content: "Derive lens formula." },
-  { id: 7, class: "12", subject: "Biology", topic: "digestive", difficulty: "medium", type: "long", content: "what is food" },
-  {
-    id: 101,
-    class: "12",
-    subject: "Math",
-    topic: "Integrals",
-    difficulty: "medium",
-    type: "mcq",
-    content: "Evaluate:  \\( \\int \\sin x \\, dx \\)<br>" +
-             "A. \\( -\\cos x + C \\)<br>" +
-             "B. \\( \\cos x + C \\)<br>" +
-             "C. \\( \\sin x + C \\)<br>" +
-             "D. \\( -\\sin x + C \\)"
-  },
-  {
-    id: 8,
-    class: "12",
-    subject: "Math",
-    topic: "Relations and Functions",
-    difficulty: "medium",
-    type: "mcq",
-    content: "Let  A = \{0, 1, 2, 3, 4, 5\}. Let \\( R \\) be a relation on \\( A \\) defined by\\( (x, y) \\in R \\) if and only if \\( \\max(x, y) \\in \\{3, 4\\} \\). <br>" +
-             "Then among the statements:  <br>" +
-             "\n(S1): The number of elements in \\( R \\) is 18\n  <br>" +
-             " (S2): The relation \\( R \\) is symmetric but neither reflexive nor transitive  <br>" +
-             " \nWhich of the following is correct? <br>" +
-             " \n(a) Only S1 is correct <br>" +
-             "\n(b) Only S2 is correct <br>" +
-             "\n(c) Both S1 and S2 are correct <br>" +
-             "\n(d) Neither S1 nor S2 is correct"
   }
 ]

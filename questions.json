@@ -155,5 +155,53 @@
     "content": "Let  A = \\{0, 1, 2, 3, 4, 5\\}. Let \\( R \\) be a relation on \\( A \\) defined by \\( (x, y) \\in R \\) if and only if \\( \\max(x, y) \\in \\{3, 4\\} \\).<br>Then among the statements:<br>(S1): The number of elements in \\( R \\) is 18<br>(S2): The relation \\( R \\) is symmetric but neither reflexive nor transitive<br>Which of the following is correct? <br>(a) Only S1 is correct<br>(b) Only S2 is correct<br>(c) Both S1 and S2 are correct<br>(d) Neither S1 nor S2 is correct",
     "solution": "Correct option: (c) Both S1 and S2 are correct",
     "marks": 1
+  },
+	{
+    "id": 12,
+    "class": "12",
+    "subject": "Math",
+    "topic": "Integral",
+    "difficulty": "medium",
+    "type": "long",
+    "format": "text",
+    "content": "Find the integral: \\( \\int \\frac{x^3 + 3x + 4}{\\sqrt{x}} \\, dx \\)",
+    "solution": "",
+    "marks": 1
+  },
+  {
+    "id": 13,
+    "class": "12",
+    "subject": "Math",
+    "topic": "Integral",
+    "difficulty": "medium",
+    "type": "long",
+    "format": "text",
+    "content": "Find the integral: \\( \\int \\frac{x^3 - x^2 + x - 1}{x - 1} \\, dx \\)",
+    "solution": "",
+    "marks": 1
+  },
+  {
+    "id": 14,
+    "class": "12",
+    "subject": "Math",
+    "topic": "Integral",
+    "difficulty": "medium",
+    "type": "long",
+    "format": "text",
+    "content": "Find the integral: \\( \\int (1 - x) \\sqrt{x} \\, dx \\)",
+    "solution": "",
+    "marks": 1
+  },
+  {
+    "id": 15,
+    "class": "12",
+    "subject": "Math",
+    "topic": "Integral",
+    "difficulty": "medium",
+    "type": "long",
+    "format": "text",
+    "content": "Find the integral: \\( \\int \\sqrt{x} (3x^2 + 2x + 3) \\, dx \\)",
+    "solution": "",
+    "marks": 1
   }
 ]

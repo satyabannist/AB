@@ -175,6 +175,7 @@ function displayQuestions() {
   MathJax.typesetPromise([DOMElements.questionList]);
 }
 
+
 function renderPaginationControls(totalItems) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const container = document.getElementById("paginationControls");
@@ -194,17 +195,12 @@ function renderPaginationControls(totalItems) {
   });
   container.appendChild(prevBtn);
 
-  // Page number buttons
-  for (let i = 1; i <= totalPages; i++) {
-    const btn = document.createElement("button");
-    btn.textContent = i;
-    btn.className = i === currentPage ? "active" : "";
-    btn.addEventListener("click", () => {
-      currentPage = i;
-      displayQuestions();
-    });
-    container.appendChild(btn);
-  }
+  // Current page indicator (styled like a button but disabled)
+  const current = document.createElement("button");
+  current.textContent = `Page ${currentPage}`;
+  current.disabled = true;
+  current.className = "active";
+  container.appendChild(current);
 
   // Next button
   const nextBtn = document.createElement("button");
@@ -218,6 +214,12 @@ function renderPaginationControls(totalItems) {
   });
   container.appendChild(nextBtn);
 }
+
+
+
+
+
+
 
 // Gets questions currently selected in the main list
 function getSelectedQuestionsFromList() {

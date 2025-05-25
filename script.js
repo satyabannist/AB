@@ -152,8 +152,13 @@ function displayQuestions() {
     return;
   }
 
-  const fragment = document.createDocumentFragment(); // Use DocumentFragment for performance
-  filtered.forEach(q => {
+  // ✅ Apply pagination here
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  const paginated = filtered.slice(start, end);
+
+  const fragment = document.createDocumentFragment();
+  paginated.forEach(q => {
     const div = document.createElement("div");
     div.className = "question";
     div.innerHTML = `
@@ -164,9 +169,40 @@ function displayQuestions() {
     `;
     fragment.appendChild(div);
   });
+
   DOMElements.questionList.appendChild(fragment);
-  MathJax.typesetPromise([DOMElements.questionList]); // Typeset only the updated list
+  renderPagination(filtered.length); // ⬅ render page buttons
+  MathJax.typesetPromise([DOMElements.questionList]);
 }
+
+function renderPagination(totalItems) {
+  let paginationDiv = document.getElementById("pagination");
+  if (!paginationDiv) {
+    paginationDiv = document.createElement("div");
+    paginationDiv.id = "pagination";
+    paginationDiv.style.marginTop = "20px";
+    paginationDiv.style.textAlign = "center";
+    DOMElements.questionList.parentElement.appendChild(paginationDiv);
+  }
+
+  paginationDiv.innerHTML = "";
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  if (totalPages <= 1) return;
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    btn.className = i === currentPage ? "active" : "";
+    btn.style.margin = "0 5px";
+    btn.addEventListener("click", () => {
+      currentPage = i;
+      displayQuestions();
+    });
+    paginationDiv.appendChild(btn);
+  }
+}
+
 
 // Gets questions currently selected in the main list
 function getSelectedQuestionsFromList() {

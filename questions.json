@@ -1,26 +1,33 @@
 [
 {
-"id":1001,
-    "class": "11",
-    "subject": "Math",
-    "topic": "Continuity",
-    "difficulty": "medium",
-    "type": "long",
-    "format": "text",
-    "content": "Prove that the function \\( f(x) = 5x - 3 \\) is continuous at \\( x = 0 \\), at \\( x = -3 \\) and at \\( x = 5 \\).",
-    "marks": 5
-  },
-  {
 "id":1002,
     "class": "11",
     "subject": "Math",
     "topic": "Continuity",
     "difficulty": "medium",
+	"year": "2000",
     "type": "long",
     "format": "text",
     "content": "Examine the continuity of the function \\( f(x) = 2x^{2} - 1 \\) at \\( x = 3 \\).",
     "marks": 5
   },
+  {
+"id":1001,
+    "class": "11",
+    "subject": "Math",
+    "topic": "Continuity",
+    "difficulty": "medium",
+	"year": "2000",
+    "type": "mcq",
+    "format": "text",
+    "content": "Prove that the function \\( f(x) = 5x - 3 \\) is continuous at \\( x = 0 \\), at \\( x = -3 \\) and at \\( x = 5 \\).",
+	"question": "What is the derivative of \\( x^2 \\)?",
+    "options": ["\\( x \\)", "\\( 2x \\)", "\\( x^2 \\)", "None"],
+    "answer": "\\( 2x \\)",
+    "solution": "The derivative of \\( x^n \\) is \\( nx^{n-1} \\). Here, \\( n = 2 \\), so the derivative is \\( 2x \\).",
+    "marks": 5
+  },
+  
   {
 "id":1003,
     "class": "11",

@@ -149,16 +149,16 @@ function displayQuestions() {
 
   if (filtered.length === 0) {
     DOMElements.questionList.textContent = "No questions found for selected filters.";
+    document.getElementById("paginationControls").innerHTML = ""; // Clear pagination
     return;
   }
 
-  // ✅ Apply pagination here
-  const start = (currentPage - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  const paginated = filtered.slice(start, end);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedQuestions = filtered.slice(startIndex, endIndex);
 
   const fragment = document.createDocumentFragment();
-  paginated.forEach(q => {
+  paginatedQuestions.forEach(q => {
     const div = document.createElement("div");
     div.className = "question";
     div.innerHTML = `
@@ -171,22 +171,14 @@ function displayQuestions() {
   });
 
   DOMElements.questionList.appendChild(fragment);
-  renderPagination(filtered.length); // ⬅ render page buttons
+  renderPaginationControls(filtered.length);
   MathJax.typesetPromise([DOMElements.questionList]);
 }
 
-function renderPagination(totalItems) {
-  let paginationDiv = document.getElementById("pagination");
-  if (!paginationDiv) {
-    paginationDiv = document.createElement("div");
-    paginationDiv.id = "pagination";
-    paginationDiv.style.marginTop = "20px";
-    paginationDiv.style.textAlign = "center";
-    DOMElements.questionList.parentElement.appendChild(paginationDiv);
-  }
-
-  paginationDiv.innerHTML = "";
+function renderPaginationControls(totalItems) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const container = document.getElementById("paginationControls");
+  container.innerHTML = "";
 
   if (totalPages <= 1) return;
 
@@ -194,12 +186,11 @@ function renderPagination(totalItems) {
     const btn = document.createElement("button");
     btn.textContent = i;
     btn.className = i === currentPage ? "active" : "";
-    btn.style.margin = "0 5px";
     btn.addEventListener("click", () => {
       currentPage = i;
       displayQuestions();
     });
-    paginationDiv.appendChild(btn);
+    container.appendChild(btn);
   }
 }
 

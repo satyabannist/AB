@@ -18,159 +18,174 @@ fetch('questions.json')
     document.getElementById("questionList").textContent = "Error loading questions.";
   });
 
-const classFilter = document.getElementById("classFilter");
-const subjectFilter = document.getElementById("subjectFilter");
-const topicFilter = document.getElementById("topicFilter");
-const difficultyFilter = document.getElementById("difficultyFilter");
-const typeFilter = document.getElementById("typeFilter");
-const questionList = document.getElementById("questionList");
-const previewBtn = document.getElementById("previewBtn");
-const previewModal = document.getElementById("previewModal");
-const closeModal = previewModal.querySelector(".close");
-const paperPreview = document.getElementById("paperPreview");
-const printBtn = document.getElementById("printBtn");
-const addToPaperBtn = document.getElementById("addToPaperBtn");
-const paperQuestionList = document.getElementById("paperQuestionList");
 
-const manualQuestionForm = document.getElementById("manualQuestionForm");
-const questionContentInput = document.getElementById("questionContent");
-const manualClass = document.getElementById("manualClass");
-const manualSubject = document.getElementById("manualSubject");
-const manualTopic = document.getElementById("manualTopic");
-const manualDifficulty = document.getElementById("manualDifficulty");
-const manualType = document.getElementById("manualType");
-const manualSolution = document.getElementById("manualSolution");
-const questionPreview = document.getElementById("questionPreview");
+// DOM Elements - Grouped for clarity
+const DOMElements = {
+  // Filters
+  classFilter: document.getElementById("classFilter"),
+  subjectFilter: document.getElementById("subjectFilter"),
+  topicFilter: document.getElementById("topicFilter"),
+  difficultyFilter: document.getElementById("difficultyFilter"),
+  yearFilter: document.getElementById("yearFilter"),
+  typeFilter: document.getElementById("typeFilter"),
+  questionSearch: document.getElementById("questionSearch"),
 
+  // Question Lists
+  questionList: document.getElementById("questionList"),
+  paperQuestionList: document.getElementById("paperQuestionList"),
+
+  // Paper Management Buttons
+  previewBtn: document.getElementById("previewBtn"),
+  addToPaperBtn: document.getElementById("addToPaperBtn"),
+  printBtn: document.getElementById("printBtn"),
+
+  // Modals and related
+  previewModal: document.getElementById("previewModal"),
+  closeModal: document.querySelector("#previewModal .close"), // More specific selector
+  paperPreview: document.getElementById("paperPreview"),
+
+  // Manual Question Form
+  manualQuestionForm: document.getElementById("manualQuestionForm"),
+  questionContentInput: document.getElementById("questionContent"),
+  manualClass: document.getElementById("manualClass"),
+  manualSubject: document.getElementById("manualSubject"),
+  manualTopic: document.getElementById("manualTopic"),
+  manualDifficulty: document.getElementById("manualDifficulty"),
+  manualType: document.getElementById("manualType"),
+  manualSolution: document.getElementById("manualSolution"),
+  manualMarks: document.getElementById("manualMarks"),
+  questionPreview: document.getElementById("questionPreview"),
+  solutionPreview: document.getElementById("solutionPreview"),
+
+  // Paper Header Inputs
+  examNameInput: document.getElementById("examNameInput"),
+  instituteNameInput: document.getElementById("instituteNameInput"),
+  subjectNameInput: document.getElementById("subjectNameInput"),
+  durationInput: document.getElementById("durationInput"),
+  yourPaperSection: document.getElementById("yourPaper"), // For scrolling
+};
+
+// Global State
 const selectedPaperQuestions = [];
-let nextManualQuestionId = 10000;
+let nextManualQuestionId = 10000; // Start with a high ID to avoid clashes with existing questions
 
-function getTopicsForSubject(subject) {
-  if (subject === "all") return [];
-  const topics = questions.filter(q => q.subject === subject).map(q => q.topic);
-  return [...new Set(topics)].sort();
-}
+// Helper Functions
+const getUniqueValues = (key) => [...new Set(questions.map(q => q[key]).filter(Boolean))].sort();
 
+// Function to update the topic filter based on the selected subject
 function updateTopicFilter() {
-  const subject = subjectFilter.value;
-  const topics = getTopicsForSubject(subject);
-  topicFilter.innerHTML = '<option value="all">All Topics</option>';
+  const subject = DOMElements.subjectFilter.value;
+  const topics = subject === "all" ? [] : getUniqueValues("topic").filter(topic =>
+    questions.some(q => q.subject === subject && q.topic === topic)
+  );
+
+  DOMElements.topicFilter.innerHTML = '<option value="all">All Topics</option>';
   topics.forEach(topic => {
     const option = document.createElement("option");
     option.value = topic;
     option.textContent = topic;
-    topicFilter.appendChild(option);
+    DOMElements.topicFilter.appendChild(option);
   });
 }
 
+// Function to populate the year filter
+function populateYearFilter() {
+  const years = getUniqueValues("year");
+  DOMElements.yearFilter.innerHTML = `<option value="all">All Years</option>`;
+  years.forEach(year => {
+    const option = document.createElement("option");
+    option.value = year;
+    option.textContent = year;
+    DOMElements.yearFilter.appendChild(option);
+  });
+}
+
+// Filters questions based on selected criteria and search query
 function filterQuestions() {
-  const selectedClass = classFilter.value;
-  const subject = subjectFilter.value;
-  const topic = topicFilter.value;
-  const difficulty = difficultyFilter.value;
-  const type = typeFilter.value;
-  const searchQuery = document.getElementById("questionSearch").value.toLowerCase();
+  const { classFilter, subjectFilter, topicFilter, difficultyFilter, typeFilter, yearFilter, questionSearch } = DOMElements;
+  const searchQuery = questionSearch.value.toLowerCase();
 
   return questions.filter(q =>
-    (selectedClass === "all" || q.class === selectedClass) &&
-    (subject === "all" || q.subject === subject) &&
-    (topic === "all" || q.topic === topic) &&
-    (difficulty === "all" || q.difficulty === difficulty) &&
-    (type === "all" || q.type === type) &&
-    (q.content.toLowerCase().includes(searchQuery) || q.solution?.toLowerCase().includes(searchQuery))
+    (classFilter.value === "all" || q.class === classFilter.value) &&
+    (subjectFilter.value === "all" || q.subject === subjectFilter.value) &&
+    (topicFilter.value === "all" || q.topic === topicFilter.value) &&
+    (difficultyFilter.value === "all" || q.difficulty === difficultyFilter.value) &&
+    (typeFilter.value === "all" || q.type === typeFilter.value) &&
+    (yearFilter.value === "all" || q.year === yearFilter.value) &&
+    (q.content?.toLowerCase().includes(searchQuery) || q.question?.toLowerCase().includes(searchQuery) || q.solution?.toLowerCase().includes(searchQuery))
   );
 }
 
+// Generates HTML for a single question for display
+function getQuestionHtml(q, isPreview = false, questionNumber = "") {
+  let contentHtml;
+  if (q.type === "mcq") {
+    const optionLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
+    const optionsHtml = q.options?.map((opt, idx) => `<li><strong>${optionLabels[idx] || String.fromCharCode(65 + idx)}.</strong> ${opt}</li>`).join("");
+    contentHtml = `
+      <strong>Q:</strong> ${q.question || q.content}<br/>
+      <ul style="margin: 5px 0; padding-left: 20px;">${optionsHtml}</ul>
+    `;
+  } else if (q.format === "image") {
+    contentHtml = `<img src="${q.content}" alt="Question Image" style="max-width: 100%; max-height: 150px;" />`;
+  } else {
+    contentHtml = q.content || q.question || "No content provided.";
+  }
+
+  const marksHtml = isPreview ? `<strong>Marks:</strong> ${q.marks || 0}` : `<strong>(${q.marks || 0} marks)</strong>`;
+
+  return `${questionNumber}${contentHtml}${isPreview ? '' : ' ' + marksHtml}`;
+}
+
+// Displays questions in the main list
 function displayQuestions() {
   const filtered = filterQuestions();
-  const start = (currentPage - 1) * itemsPerPage;
-  const paginated = filtered.slice(start, start + itemsPerPage);
+  DOMElements.questionList.innerHTML = "";
 
-  questionList.innerHTML = "";
-  if (paginated.length === 0) {
-    questionList.textContent = "No questions found.";
+  if (filtered.length === 0) {
+    DOMElements.questionList.textContent = "No questions found for selected filters.";
     return;
   }
 
-  paginated.forEach(q => {
+  const fragment = document.createDocumentFragment(); // Use DocumentFragment for performance
+  filtered.forEach(q => {
     const div = document.createElement("div");
     div.className = "question";
     div.innerHTML = `
       <label>
-        <input type="checkbox" value="${q.id}" />
-        <span>${q.format === "image" ? `<img src="${q.content}" />` : q.content}</span>
+        <input type="checkbox" value="${q.id}" ${selectedPaperQuestions.some(sq => sq.id === q.id) ? "checked" : ""} />
+        <span>${getQuestionHtml(q)}</span>
       </label>
     `;
-    questionList.appendChild(div);
+    fragment.appendChild(div);
   });
-
-  renderPaginationControls(filtered.length);
-  MathJax.typesetPromise();
+  DOMElements.questionList.appendChild(fragment);
+  MathJax.typesetPromise([DOMElements.questionList]); // Typeset only the updated list
 }
 
-
-function renderPaginationControls(totalItems) {
-  let pagination = document.getElementById("paginationControls");
-  if (!pagination) {
-    pagination = document.createElement("div");
-    pagination.id = "paginationControls";
-    pagination.style.textAlign = "center";
-    pagination.style.marginTop = "20px";
-    questionList.parentElement.appendChild(pagination);
-  }
-
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  pagination.innerHTML = `
-    <button ${currentPage === 1 ? "disabled" : ""} id="prevPage">Previous</button>
-    <span> Page ${currentPage} of ${totalPages} </span>
-    <button ${currentPage === totalPages ? "disabled" : ""} id="nextPage">Next</button>
-  `;
-
-  document.getElementById("prevPage")?.addEventListener("click", () => {
-    if (currentPage > 1) {
-      currentPage--;
-      displayQuestions();
-    }
-  });
-
-  document.getElementById("nextPage")?.addEventListener("click", () => {
-    if (currentPage < totalPages) {
-      currentPage++;
-      displayQuestions();
-    }
-  });
+// Gets questions currently selected in the main list
+function getSelectedQuestionsFromList() {
+  const checkedIds = Array.from(DOMElements.questionList.querySelectorAll("input[type=checkbox]:checked"))
+    .map(cb => parseInt(cb.value));
+  return questions.filter(q => checkedIds.includes(q.id));
 }
 
-
-
-
-
-
-
-function getSelectedQuestions() {
-  return questions.filter(q =>
-    Array.from(questionList.querySelectorAll("input[type=checkbox]:checked"))
-      .map(cb => parseInt(cb.value))
-      .includes(q.id)
-  );
-}
-
+// Renders questions in the "Your Paper" section
 function renderPaperQuestions() {
-  paperQuestionList.innerHTML = "";
+  DOMElements.paperQuestionList.innerHTML = "";
   if (selectedPaperQuestions.length === 0) {
-    paperQuestionList.textContent = "No questions added yet.";
+    DOMElements.paperQuestionList.textContent = "No questions added yet.";
     return;
   }
 
+  const fragment = document.createDocumentFragment();
   selectedPaperQuestions.forEach((q, i) => {
     const div = document.createElement("div");
     div.className = "question";
     div.innerHTML = `
       <div style="display:flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
         <div style="flex-grow: 1;">
-          <span>
-  ${i + 1}. ${q.format === "image" ? `<img src="${q.content}" alt="Question Image" style="max-width: 100%; max-height: 150px;" />` : q.content}
-</span>
+          <span>${i + 1}. ${getQuestionHtml(q)}</span>
         </div>
         <div>
           <input type="number" class="mark-input" data-id="${q.id}" value="${q.marks || 0}" min="0" style="width: 60px;" /> marks
@@ -178,232 +193,243 @@ function renderPaperQuestions() {
         </div>
       </div>
       <div class="solution" style="display:none; margin-left:20px; color:#444; margin-top:5px;">
-        <em>
-  ${
-    q.solutionFormat === "image"
-      ? `<img src="${q.solution}" alt="Solution Image" style="max-width:100%; margin-top:10px;" />`
-      : q.solution || "Solution not available."
-  }
-</em>
+        <em>${q.solutionFormat === "image" ? `<img src="${q.solution}" alt="Solution Image" style="max-width:100%; margin-top:10px;" />` : (q.solution || "Solution not available.")}</em>
       </div>
       <button class="toggle-solution btn-secondary" style="margin-left:20px; margin-top:5px;">Show Solution</button>
     `;
-    paperQuestionList.appendChild(div);
+    fragment.appendChild(div);
   });
-
-  // NEW: Update marks in selectedPaperQuestions when edited
-  paperQuestionList.querySelectorAll('.mark-input').forEach(input => {
-    input.addEventListener('input', () => {
-      const id = parseInt(input.getAttribute('data-id'));
-      const question = selectedPaperQuestions.find(q => q.id === id);
-      if (question) {
-        question.marks = parseInt(input.value) || 0;
-      }
-    });
-  });
-
-  MathJax.typesetPromise();
+  DOMElements.paperQuestionList.appendChild(fragment);
+  MathJax.typesetPromise([DOMElements.paperQuestionList]);
 }
 
+// Event Listeners for "Your Paper" section (delegated)
+DOMElements.paperQuestionList.addEventListener("click", (e) => {
+  const target = e.target;
 
-paperQuestionList.addEventListener("click", (e) => {
-  const removeBtn = e.target.closest(".remove-btn");
-  if (removeBtn && paperQuestionList.contains(removeBtn)) {
-    e.stopPropagation();
-    const idToRemove = parseInt(removeBtn.getAttribute("data-id"));
+  // Handle remove button
+  if (target.classList.contains("remove-btn")) {
+    const idToRemove = parseInt(target.getAttribute("data-id"));
     const index = selectedPaperQuestions.findIndex(q => q.id === idToRemove);
     if (index > -1) {
       selectedPaperQuestions.splice(index, 1);
       renderPaperQuestions();
+      displayQuestions(); // Update checkboxes in main list
     }
-    return;
   }
-  const toggleBtn = e.target.closest(".toggle-solution");
-  if (toggleBtn && paperQuestionList.contains(toggleBtn)) {
-    e.stopPropagation();
-    const solutionDiv = toggleBtn.previousElementSibling;
+
+  // Handle toggle solution button
+  if (target.classList.contains("toggle-solution")) {
+    const solutionDiv = target.previousElementSibling;
     if (solutionDiv) {
       const isVisible = solutionDiv.style.display === "block";
       solutionDiv.style.display = isVisible ? "none" : "block";
-      toggleBtn.textContent = isVisible ? "Show Solution" : "Hide Solution";
-      MathJax.typesetPromise();
+      target.textContent = isVisible ? "Show Solution" : "Hide Solution";
+      MathJax.typesetPromise([solutionDiv]);
     }
   }
 });
 
-addToPaperBtn.addEventListener("click", () => {
-  const currentlySelected = getSelectedQuestions();
+// Event listener for mark input changes (delegated)
+DOMElements.paperQuestionList.addEventListener('input', (e) => {
+  const target = e.target;
+  if (target.classList.contains('mark-input')) {
+    const id = parseInt(target.getAttribute('data-id'));
+    const question = selectedPaperQuestions.find(q => q.id === id);
+    if (question) {
+      question.marks = parseInt(target.value, 10) || 0;
+    }
+  }
+});
+
+// Adds selected questions from main list to paper
+DOMElements.addToPaperBtn.addEventListener("click", () => {
+  const currentlySelected = getSelectedQuestionsFromList();
   currentlySelected.forEach(q => {
     if (!selectedPaperQuestions.some(pq => pq.id === q.id)) {
       selectedPaperQuestions.push(q);
     }
   });
   renderPaperQuestions();
-  questionList.querySelectorAll("input[type=checkbox]:checked").forEach(cb => cb.checked = false);
+  displayQuestions(); // Re-render main list to update checked states
 });
 
-previewBtn.addEventListener("click", () => {
-  paperPreview.innerHTML = "";
+// Handles preview button click
+DOMElements.previewBtn.addEventListener("click", () => {
+  DOMElements.paperPreview.innerHTML = "";
   if (selectedPaperQuestions.length === 0) {
-    paperPreview.textContent = "No questions selected.";
+    DOMElements.paperPreview.textContent = "No questions selected.";
   } else {
     selectedPaperQuestions.forEach((q, i) => {
       const p = document.createElement("p");
-      p.innerHTML = `${i + 1}. ${q.content}`;
-      paperPreview.appendChild(p);
+      p.innerHTML = `${i + 1}. ${getQuestionHtml(q, true)}`; // Use getQuestionHtml with isPreview = true
+      DOMElements.paperPreview.appendChild(p);
     });
   }
-  MathJax.typesetPromise().then(() => {
-    previewModal.style.display = "block";
-    paperPreview.focus();
+
+  MathJax.typesetPromise([DOMElements.paperPreview]).then(() => {
+    DOMElements.previewModal.style.display = "block";
+    DOMElements.paperPreview.focus();
   });
 });
 
-closeModal.addEventListener("click", () => {
-  previewModal.style.display = "none";
+// Handles modal close button click
+DOMElements.closeModal.addEventListener("click", () => {
+  DOMElements.previewModal.style.display = "none";
 });
 
+// Handles Escape key to close modal
 window.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && previewModal.style.display === "block") {
-    previewModal.style.display = "none";
+  if (e.key === "Escape" && DOMElements.previewModal.style.display === "block") {
+    DOMElements.previewModal.style.display = "none";
   }
 });
 
+// Handles click outside modal to close
 window.addEventListener("click", e => {
-  if (e.target === previewModal) previewModal.style.display = "none";
+  if (e.target === DOMElements.previewModal) DOMElements.previewModal.style.display = "none";
 });
 
-printBtn.addEventListener("click", () => {
-const selected = selectedPaperQuestions;
-const date = new Date().toLocaleDateString();
-const examName = document.getElementById("examNameInput").value.trim();
-const institute = document.getElementById("instituteNameInput").value.trim();
-const subject = document.getElementById("subjectNameInput").value.trim();
-const duration = document.getElementById("durationInput").value.trim();
+// Handles print button click
+DOMElements.printBtn.addEventListener("click", () => {
+  const { examNameInput, instituteNameInput, subjectNameInput, durationInput } = DOMElements;
+  const date = new Date().toLocaleDateString();
+  const examName = examNameInput.value.trim();
+  const institute = instituteNameInput.value.trim();
+  const subject = subjectNameInput.value.trim();
+  const duration = durationInput.value.trim();
 
-  let content = `
-<div style="text-align: center; margin-bottom: 20px;">
-  <h1 style="margin: 0;">${institute || ""}</h1>
-<h2 style="margin: 5px 0;">${examName || ""}</h2>
-<p><strong>Subject:</strong> ${subject || ""} &nbsp;&nbsp; <strong>Date:</strong> ${date}</p>
-<p><strong>Time:</strong> ${duration || ""} &nbsp;&nbsp; <strong>Total Marks:</strong> __MARKS_PLACEHOLDER__</p>
-
-  </div>
-
-    <div style="font-family: 'Georgia', serif; font-size: 16px;">`;
   let totalMarks = 0;
-selected.forEach((q, i) => {
+  const questionsHtml = selectedPaperQuestions.map((q, i) => {
   const marks = q.marks || 0;
   totalMarks += marks;
- content += `<p>${i + 1}. ${q.format === "image" ? `<img src="${q.content}" alt="Question Image" style="max-width: 100%; max-height: 150px;" />` : q.content} <strong>(${marks} marks)</strong></p>`;
+  return `<p>${i + 1}. ${getQuestionHtml(q, true)} <strong>(${marks} marks)</strong></p>`;
+}).join("");
 
-});
-content = content.replace('__MARKS_PLACEHOLDER__', totalMarks);
-  content += "</div>";
+  const content = `
+    <div style="text-align: center; margin-bottom: 20px;">
+      <h1 style="margin: 0;">${institute || ""}</h1>
+      <h2 style="margin: 5px 0;">${examName || ""}</h2>
+      <p><strong>Subject:</strong> ${subject || ""} &nbsp;&nbsp; <strong>Date:</strong> ${date}</p>
+      <p><strong>Time:</strong> ${duration || ""} &nbsp;&nbsp; <strong>Total Marks:</strong> ${totalMarks}</p>
+    </div>
+    <div style="font-family: 'Georgia', serif; font-size: 16px;">
+      ${questionsHtml}
+    </div>
+  `;
+
   const printWindow = window.open("", "_blank");
-printWindow.document.write(`
-  <html>
-    <head>
-      <title>Print Question Paper</title>
-      <style>
-        html, body {
-          height: 100%;
-          margin: 0;
-          padding: 0;
-          font-family: 'Georgia', serif;
-          line-height: 1.6;
-          display: flex;
-          flex-direction: column;
-        }
-        .print-body {
-          padding: 40px;
-          flex: 1;
-        }
-        .print-footer {
-          text-align: center;
-          font-size: 0.9rem;
-          color: #555;
-          padding: 20px;
-          border-top: 1px solid #ccc;
-        }
-        @media print {
-          button { display: none; }
-        }
-      </style>
-      <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    </head>
-    <body>
-      <div class="print-body">
-        ${content}
-      </div>
-      <footer class="print-footer">
-        Question paper generated by: <strong>QPaperGen.com</strong>
-      </footer>
-    </body>
-  </html>`);
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>Print Question Paper</title>
+        <style>
+          html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+          }
+          .print-body {
+            padding: 40px;
+            flex: 1;
+          }
+          .print-footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+            padding: 20px;
+            border-top: 1px solid #ccc;
+          }
+          @media print {
+            button { display: none; }
+          }
+        </style>
+        <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      </head>
+      <body>
+        <div class="print-body">
+          ${content}
+        </div>
+        <footer class="print-footer">
+          Question paper generated by: <strong>QPaperGen.com</strong>
+        </footer>
+      </body>
+    </html>
+  `);
 
   printWindow.document.close();
   printWindow.focus();
-  setTimeout(() => printWindow.print(), 1000);
+
+  // Delay to ensure content is rendered before print
+  setTimeout(() => {
+    printWindow.print();
+    printWindow.close();
+  }, 1000);
 });
 
-classFilter.addEventListener("change", () => {
+// Event Listeners for Filters
+DOMElements.classFilter.addEventListener("change", () => {
   updateTopicFilter();
   displayQuestions();
 });
-subjectFilter.addEventListener("change", () => {
+DOMElements.subjectFilter.addEventListener("change", () => {
   updateTopicFilter();
   displayQuestions();
 });
-topicFilter.addEventListener("change", displayQuestions);
-difficultyFilter.addEventListener("change", displayQuestions);
-typeFilter.addEventListener("change", displayQuestions);
-document.getElementById("questionSearch").addEventListener("input", displayQuestions);
+DOMElements.topicFilter.addEventListener("change", displayQuestions);
+DOMElements.difficultyFilter.addEventListener("change", displayQuestions);
+DOMElements.typeFilter.addEventListener("change", displayQuestions);
+DOMElements.yearFilter.addEventListener("change", displayQuestions);
+DOMElements.questionSearch.addEventListener("input", displayQuestions);
 
 
-manualQuestionForm.addEventListener("submit", (e) => {
+// Manual Question Form Submission
+DOMElements.manualQuestionForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const manualMarks = document.getElementById("manualMarks");
 
-const newQuestion = {
-  id: nextManualQuestionId++,
-  class: manualClass.value,
-  subject: manualSubject.value.trim(),
-  topic: manualTopic.value.trim(),
-  difficulty: manualDifficulty.value,
-  type: manualType.value,
-  content: questionContentInput.value.trim(),
-  solution: manualSolution.value.trim() || null,
-  marks: parseInt(manualMarks.value, 10),
-};
+  const newQuestion = {
+    id: nextManualQuestionId++,
+    class: DOMElements.manualClass.value,
+    subject: DOMElements.manualSubject.value.trim(),
+    topic: DOMElements.manualTopic.value.trim(),
+    difficulty: DOMElements.manualDifficulty.value,
+    type: DOMElements.manualType.value,
+    content: DOMElements.questionContentInput.value.trim(),
+    solution: DOMElements.manualSolution.value.trim() || null,
+    marks: parseInt(DOMElements.manualMarks.value, 10),
+  };
   selectedPaperQuestions.push(newQuestion);
   renderPaperQuestions();
-  manualQuestionForm.reset();
-  document.getElementById("yourPaper").scrollIntoView({ behavior: "smooth" });
+  DOMElements.manualQuestionForm.reset();
+  DOMElements.questionPreview.innerHTML = ""; // Clear preview after submission
+  DOMElements.solutionPreview.innerHTML = ""; // Clear solution preview after submission
+  DOMElements.yourPaperSection.scrollIntoView({ behavior: "smooth" });
   MathJax.typesetPromise();
 });
 
-questionContentInput.addEventListener("input", () => {
-  const content = questionContentInput.value.trim();
-  if (!content) {
-    questionPreview.innerHTML = "";
-    return;
-  }
-  questionPreview.textContent = content;
-  MathJax.typesetPromise([questionPreview]);
-});
-const solutionPreview = document.getElementById("solutionPreview");
-
-manualSolution.addEventListener("input", () => {
-  const content = manualSolution.value.trim();
-  if (!content) {
-    solutionPreview.innerHTML = "";
-    return;
-  }
-  solutionPreview.textContent = content;
-  MathJax.typesetPromise([solutionPreview]);
+// Manual Question Content Preview
+DOMElements.questionContentInput.addEventListener("input", () => {
+  const content = DOMElements.questionContentInput.value.trim();
+  DOMElements.questionPreview.textContent = content;
+  if (content) MathJax.typesetPromise([DOMElements.questionPreview]);
 });
 
-updateTopicFilter();
-displayQuestions();
-renderPaperQuestions();
+// Manual Solution Preview
+DOMElements.manualSolution.addEventListener("input", () => {
+  const content = DOMElements.manualSolution.value.trim();
+  DOMElements.solutionPreview.textContent = content;
+  if (content) MathJax.typesetPromise([DOMElements.solutionPreview]);
+});
+
+
+// Initial Load
+document.addEventListener("DOMContentLoaded", () => {
+  populateYearFilter();
+  updateTopicFilter();
+  displayQuestions();
+  renderPaperQuestions();
+});

@@ -42,7 +42,6 @@
         <option value="10">Class 10</option>
         <option value="11">Class 11</option>
         <option value="12">Class 12</option>
-	
       </select>
 
       <select id="subjectFilter" aria-label="Filter by Subject">
@@ -56,6 +55,10 @@
       <select id="topicFilter" aria-label="Filter by Topic">
         <option value="all">All Topics</option>
       </select>
+	  
+	  <select id="yearFilter">
+  <option value="all">All Years</option>
+</select>
 
       <select id="difficultyFilter" aria-label="Filter by Difficulty">
         <option value="all">All Difficulties</option>
@@ -76,8 +79,7 @@
     <!-- Filtered Questions List -->
     <div id="questionList" class="question-list" aria-live="polite" aria-label="Filtered Questions"></div>
 	
-	<!-- Pagination Controls -->
-<div id="paginationControls" style="text-align: center; margin: 20px 0;"></div>
+	
 
 	
 
@@ -101,7 +103,6 @@
           <option value="" disabled selected>Select Class</option>
           <option value="11">Class 11</option>
           <option value="12">Class 12</option>
-	  
         </select>
 
         <input id="manualSubject" type="text" placeholder="Subject" required

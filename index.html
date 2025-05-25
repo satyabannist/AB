@@ -178,6 +178,41 @@
       <p>Contact: <a href="mailto:support@qpapergen.com">support@qpapergen.com</a></p>
     </div>
   </footer>
+<script>
+  // Disable right-click
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+
+  // Disable text selection
+  document.addEventListener('selectstart', function (e) {
+    e.preventDefault();
+  });
+
+  // Disable key shortcuts (like F12, Ctrl+U, Ctrl+Shift+I)
+  document.addEventListener('keydown', function (e) {
+    // F12
+    if (e.key === "F12") {
+      e.preventDefault();
+    }
+    // Ctrl+U
+    if (e.ctrlKey && e.key.toLowerCase() === 'u') {
+      e.preventDefault();
+    }
+    // Ctrl+Shift+I
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {
+      e.preventDefault();
+    }
+    // Ctrl+Shift+J (Dev tools)
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'j') {
+      e.preventDefault();
+    }
+    // Ctrl+S (Prevent Save)
+    if (e.ctrlKey && e.key.toLowerCase() === 's') {
+      e.preventDefault();
+    }
+  });
+</script>
 
 </body>
 

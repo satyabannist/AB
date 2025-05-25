@@ -11,8 +11,13 @@ fetch('questions.json')
   })
   .then(data => {
     questions = data;
+    populateYearFilter();     // ✅ Move it here
+    updateTopicFilter();      // ✅ Optional: also move here for safety
     displayQuestions();
   })
+
+
+
   .catch(error => {
     console.error('Failed to load questions:', error);
     document.getElementById("questionList").textContent = "Error loading questions.";
@@ -428,8 +433,6 @@ DOMElements.manualSolution.addEventListener("input", () => {
 
 // Initial Load
 document.addEventListener("DOMContentLoaded", () => {
-  populateYearFilter();
-  updateTopicFilter();
   displayQuestions();
   renderPaperQuestions();
 });

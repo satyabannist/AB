@@ -182,6 +182,19 @@ function renderPaginationControls(totalItems) {
 
   if (totalPages <= 1) return;
 
+  // Previous button
+  const prevBtn = document.createElement("button");
+  prevBtn.textContent = "Previous";
+  prevBtn.disabled = currentPage === 1;
+  prevBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      displayQuestions();
+    }
+  });
+  container.appendChild(prevBtn);
+
+  // Page number buttons
   for (let i = 1; i <= totalPages; i++) {
     const btn = document.createElement("button");
     btn.textContent = i;
@@ -192,8 +205,19 @@ function renderPaginationControls(totalItems) {
     });
     container.appendChild(btn);
   }
-}
 
+  // Next button
+  const nextBtn = document.createElement("button");
+  nextBtn.textContent = "Next";
+  nextBtn.disabled = currentPage === totalPages;
+  nextBtn.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      displayQuestions();
+    }
+  });
+  container.appendChild(nextBtn);
+}
 
 // Gets questions currently selected in the main list
 function getSelectedQuestionsFromList() {

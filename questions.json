@@ -9,5 +9,5 @@
     "format": "text",
     "content": "Prove that the function \\( f(x) = 5x - 3 \\) is continuous at \\( x = 0 \\), at \\( x = -3 \\) and at \\( x = 5 \\).",
     "marks": 5
-  },
+  }
 ]

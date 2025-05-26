@@ -2917,28 +2917,6 @@
         "marks": 1
     }, 
 
-	{
-  "id": 2024001,
-  "class": "12",
-  "subject": "Math",
-  "topic": "Matrices",
-  "difficulty": "easy",
-  "year": "2024",
-  "type": "mcq",
-  "format": "text",
-  "content":"Integrate "
-  "question": "If \\( A = \\begin{bmatrix}-1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1\\end{bmatrix} \\), then \\( A^{-1} \\) is:",
-  "options": [
-    "\\( \\begin{bmatrix}-1 & 0 & 0 \\\\ 0 & -1 & 0 \\\\ 0 & 0 & -1\\end{bmatrix} \\)",
-    "\\( \\begin{bmatrix}1 & 0 & 0 \\\\ 0 & -1 & 0 \\\\ 0 & 0 & -1\\end{bmatrix} \\)",
-    "\\( \\begin{bmatrix}-1 & 0 & 0 \\\\ 0 & -1 & 0 \\\\ 0 & 0 & 1\\end{bmatrix} \\)",
-    "\\( \\begin{bmatrix}-1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1\\end{bmatrix} \\)"
-  ],
-  "answer": 3,
-  "solution": "",
-  "marks": 1
-}
-
-
+	
 	
 ]
